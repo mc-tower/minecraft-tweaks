@@ -10,7 +10,6 @@ export default {
 			resolve: false,
 		},
 		src: '/dist',
-		packs: '/packs',
 	},
 	plugins: ['@snowpack/plugin-svelte', '@snowpack/plugin-postcss'],
 	routes: [
