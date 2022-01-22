@@ -39,7 +39,6 @@ export default {
 	},
 	devOptions: {
 		open: 'none',
-		tailwindConfig: './tailwind.config.js',
 	},
 	buildOptions: {
 		htmlFragments: true,

@@ -4,6 +4,6 @@
 </script>
 
 <RoundedBox color="bg-slate-800">
-	<h5 class="text-3xl pb-6">Download selected</h5>
+	<h5 class="text-2xl pb-6">Selector</h5>
 	<Button>Download</Button>
 </RoundedBox>

@@ -7,7 +7,7 @@
 </script>
 
 <main
-	class="max-w-5xl mx-auto text-xl text-slate-50 grid grid-cols-3 gap-4 px-4 pt-4">
+	class="max-w-5xl mx-auto text-xl text-neutral-300 grid grid-cols-3 gap-4 px-4 pt-4">
 	<div class="md:col-span-2 col-span-full">
 		{#await loadResourcePacksList() then list}
 			{#if Object.keys(list).length}
