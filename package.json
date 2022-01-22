@@ -1,0 +1,32 @@
+{
+  "scripts": {
+    "dev": "snowpack dev",
+    "build": "snowpack build",
+    "format": "prettier --write --plugin-search-dir=. './**/*.js' './**/*.mjs' './**/*.svelte' './**/*.json'",
+    "format:check": "prettier --check --plugin-search-dir=. './**/*.js' './**/*.mjs' './**/*.svelte' './**/*.json'",
+    "prepare": "husky install .husky",
+    "test": "web-test-runner \"src/**/*.test.js\""
+  },
+  "devDependencies": {
+    "@snowpack/app-scripts-svelte": "^2.0.0",
+    "@snowpack/plugin-dotenv": "^2.0.4",
+    "@snowpack/plugin-svelte": "^3.3.0",
+    "@snowpack/web-test-runner-plugin": "^0.2.1",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/svelte": "^3.0.0",
+    "@web/test-runner": "^0.12.15",
+    "autoprefixer": "^10.0.4",
+    "chai": "^4.2.0",
+    "husky": "^5.0.9",
+    "jest": "^26.4.2",
+    "lint-staged": "^10.2.13",
+    "postcss": "^8.1.10",
+    "postcss-load-config": "^3.0.0",
+    "prettier": "^2.2.1",
+    "prettier-plugin-svelte": "^2.1.4",
+    "snowpack": "^3.0.11",
+    "svelte": "^3.46.2",
+    "svelte-preprocess": "^4.1.1",
+    "tailwindcss": "^3.0.15"
+  }
+}
