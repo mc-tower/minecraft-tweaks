@@ -10,8 +10,9 @@ export default {
 			resolve: false,
 		},
 		src: '/dist',
+		packs: '/packs',
 	},
-	plugins: ['@snowpack/plugin-svelte', '@snowpack/plugin-dotenv'],
+	plugins: ['@snowpack/plugin-svelte', '@snowpack/plugin-postcss'],
 	routes: [
 		/* Enable an SPA Fallback in development: */
 		// { match: 'routes', src: '.*', dest: '/index.html' },
@@ -26,6 +27,7 @@ export default {
 	},
 	devOptions: {
 		open: 'none',
+		tailwindConfig: './tailwind.config.js',
 	},
 	buildOptions: {
 		htmlFragments: true,
