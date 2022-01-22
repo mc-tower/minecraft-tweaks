@@ -1,6 +1,8 @@
 {
   "scripts": {
-    "dev": "snowpack dev",
+    "dev": "redrun --parallel dev:packs dev:snowpack",
+    "dev:packs": "sirv ../packs --cors --port 8081 --quiet",
+    "dev:snowpack": "snowpack dev",
     "build": "snowpack build",
     "format": "prettier --write --plugin-search-dir=. './**/*.js' './**/*.mjs' './**/*.svelte' './**/*.json'",
     "format:check": "prettier --check --plugin-search-dir=. './**/*.js' './**/*.mjs' './**/*.svelte' './**/*.json'",
@@ -17,6 +19,7 @@
     "@web/test-runner": "^0.12.15",
     "autoprefixer": "^10.0.4",
     "chai": "^4.2.0",
+    "http2-proxy": "^5.0.53",
     "husky": "^5.0.9",
     "jest": "^26.4.2",
     "lint-staged": "^10.2.13",
@@ -24,6 +27,8 @@
     "postcss-load-config": "^3.0.0",
     "prettier": "^2.2.1",
     "prettier-plugin-svelte": "^2.1.4",
+    "redrun": "^9.0.1",
+    "sirv-cli": "^2.0.2",
     "snowpack": "^3.0.11",
     "svelte": "^3.46.2",
     "svelte-preprocess": "^4.1.1",

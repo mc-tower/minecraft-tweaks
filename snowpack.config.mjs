@@ -1,3 +1,5 @@
+import proxy from 'http2-proxy'
+
 /** @type {import("snowpack").SnowpackUserConfig } */
 export default {
 	alias: {
@@ -13,6 +15,17 @@ export default {
 	},
 	plugins: ['@snowpack/plugin-svelte', '@snowpack/plugin-postcss'],
 	routes: [
+		{
+			src: '/packs/.*',
+			dest: (req, res) => {
+				req.url = req.url.replace(/^\/packs/, '')
+
+				return proxy.web(req, res, {
+					hostname: 'localhost',
+					port: 8081,
+				})
+			},
+		},
 		/* Enable an SPA Fallback in development: */
 		// { match: 'routes', src: '.*', dest: '/index.html' },
 	],

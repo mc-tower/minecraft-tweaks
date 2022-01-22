@@ -15,9 +15,6 @@ and clone inside two repos - `vanilla-tweaks` *and* `packs`, then
 
 ```bash
 cd vanilla-tweaks
-
-ln -s ../packs packs
-
 yarn install
 yarn dev
 ```
