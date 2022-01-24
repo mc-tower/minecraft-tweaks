@@ -1,7 +1,7 @@
 {
   "scripts": {
     "dev": "redrun --parallel dev:packs dev:snowpack",
-    "dev:packs": "sirv ../packs --cors --port 8081 --quiet",
+    "dev:packs": "sirv ../packs/build --cors --port 8081 --quiet",
     "dev:snowpack": "snowpack dev",
     "build": "snowpack build",
     "format": "prettier --write --plugin-search-dir=. './**/*.js' './**/*.mjs' './**/*.svelte' './**/*.json'",

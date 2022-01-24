@@ -1,4 +1,4 @@
-# Vanilla tweaks
+# Minecraft tweaks
 
 Inspired by https://vanillatweaks.net
 
@@ -11,10 +11,10 @@ mkdir mc-tower
 cd mc-tower
 ```
 
-and clone inside two repos - `vanilla-tweaks` *and* `packs`, then
+and clone inside two repos - `minecraft-tweaks` *and* `packs`, then
 
 ```bash
-cd vanilla-tweaks
+cd minecraft-tweaks
 yarn install
 yarn dev
 ```
