@@ -3,6 +3,8 @@
 
 	import Checkbox from 'src/components/atoms/Checkbox.svelte'
 	import RoundedBox from 'src/components/atoms/RoundedBox.svelte'
+
+	import { selectedPacks } from 'src/stores/selected.js'
 </script>
 
 <script>
@@ -11,6 +13,14 @@
 	let opened = false
 	function toggleOpen() {
 		opened = !opened
+	}
+
+	function handleCheck(pack_id, e) {
+		if (e.target.checked) {
+			selectedPacks.add(pack_id)
+		} else {
+			selectedPacks.delete(pack_id)
+		}
 	}
 </script>
 
@@ -22,7 +32,7 @@
 	{#if opened}
 		<div class="pt-6" transition:slide={{ duration: 100 }}>
 			{#each category.packs as pack (pack.id)}
-				<Checkbox name={pack.id}>
+				<Checkbox name={pack.id} on:change={(e) => handleCheck(pack.id, e)}>
 					{pack.name}
 				</Checkbox>
 			{/each}
