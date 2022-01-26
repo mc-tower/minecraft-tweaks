@@ -4,7 +4,7 @@
 	import Checkbox from 'src/components/atoms/Checkbox.svelte'
 	import RoundedBox from 'src/components/atoms/RoundedBox.svelte'
 
-	import { selectedPacks } from 'src/stores/selected.js'
+	import { selectedPacks } from 'src/stores/packs.js'
 </script>
 
 <script>

@@ -7,7 +7,7 @@ import * as zip from '@zip.js/zip.js'
 import { get } from 'svelte/store'
 
 import { loadResourcesList, loadResource } from 'src/api/resources.js'
-import { selectedPacks } from 'src/stores/selected.js'
+import { selectedPacks } from 'src/stores/packs.js'
 
 export async function makePack() {
 	let resources = new Set(),
