@@ -2836,6 +2836,11 @@
     portfinder "^1.0.28"
     source-map "^0.7.3"
 
+"@zip.js/zip.js@^2.4.1":
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/@zip.js/zip.js/-/zip.js-2.4.1.tgz#7246b1183e9add56d87bbf59466f9c1505cd3a32"
+  integrity sha512-iVLh0ZqPPNMrCWITD4dcLyZ9nq4N4qBZocNfmrbtFzs2guqlHqmxxKZLL83QAwCPH7sLnfgI5RvUJJnpvTaZxA==
+
 abab@^2.0.3, abab@^2.0.5:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/abab/-/abab-2.0.5.tgz#c0b678fb32d60fc1219c784d6a826fe385aeb79a"

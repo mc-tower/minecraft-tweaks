@@ -15,11 +15,11 @@
 		opened = !opened
 	}
 
-	function handleCheck(pack_id, e) {
+	function handleCheck(pack_path, e) {
 		if (e.target.checked) {
-			selectedPacks.add(pack_id)
+			selectedPacks.add(pack_path)
 		} else {
-			selectedPacks.delete(pack_id)
+			selectedPacks.delete(pack_path)
 		}
 	}
 </script>
@@ -32,7 +32,9 @@
 	{#if opened}
 		<div class="pt-6" transition:slide={{ duration: 100 }}>
 			{#each category.packs as pack (pack.id)}
-				<Checkbox name={pack.id} on:change={(e) => handleCheck(pack.id, e)}>
+				<Checkbox
+					name={pack.id}
+					on:change={(e) => handleCheck(`${category.id}/${pack.id}`, e)}>
 					{pack.name}
 				</Checkbox>
 			{/each}
