@@ -2,7 +2,7 @@
 	import Button from 'src/components/atoms/Button.svelte'
 	import RoundedBox from 'src/components/atoms/RoundedBox.svelte'
 
-	import { packStatus } from 'src/stores/packs.js'
+	import { downloadProgress, packStatus } from 'src/stores/packs.js'
 
 	import { makePack } from 'src/utils/creator.js'
 
@@ -12,7 +12,7 @@
 			case 'waiting':
 				return 'Download'
 			case 'download':
-				return 'Downloading...'
+				return 'Downloading'
 			case 'zip':
 				return 'Zipping...'
 		}
@@ -24,4 +24,7 @@
 	<Button on:click={makePack} disabled={$packStatus !== 'waiting'}>
 		{downloadButtonText($packStatus)}
 	</Button>
+	{#if $downloadProgress >= 0}
+		{$downloadProgress}%
+	{/if}
 </RoundedBox>

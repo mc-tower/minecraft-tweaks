@@ -7,7 +7,11 @@ import * as zip from '@zip.js/zip.js'
 import { get } from 'svelte/store'
 
 import { loadResourcesList, loadResource } from 'src/api/resources.js'
-import { selectedPacks, makeStatus } from 'src/stores/packs.js'
+import {
+	downloadProgress,
+	makeStatus,
+	selectedPacks,
+} from 'src/stores/packs.js'
 
 export async function makePack() {
 	let resources = new Set(),
@@ -34,13 +38,22 @@ export async function makePack() {
 		})
 	}
 
+	downloadProgress.set(0)
+	const downloadCount = resources.size
+	let i = 0
+
 	// load images
 	for (let file of resources.values()) {
 		blobs.push({
 			name: file.name,
 			content: await loadResource(file.path),
 		})
+
+		i += 1
+		downloadProgress.set(Math.floor((i * 100) / downloadCount))
 	}
+
+	downloadProgress.set(-1)
 
 	// write zip
 
