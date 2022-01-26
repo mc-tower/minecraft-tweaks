@@ -1,4 +1,4 @@
-import { writable } from 'svelte/store'
+import { derived, writable } from 'svelte/store'
 
 function setStore() {
 	const { subscribe, set, update } = writable(new Set())
@@ -20,3 +20,18 @@ function setStore() {
 }
 
 export const selectedPacks = setStore()
+
+// none, download, zip
+export const makeStatus = writable('none')
+
+// ...makeStatus, waiting
+export const packStatus = derived(
+	[selectedPacks, makeStatus],
+	([$selectedPacks, $makeStatus], set) => {
+		if ($selectedPacks.size !== 0) {
+			set($makeStatus === 'none' ? 'waiting' : $makeStatus)
+		} else {
+			set('none')
+		}
+	}
+)

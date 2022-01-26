@@ -7,7 +7,7 @@ import * as zip from '@zip.js/zip.js'
 import { get } from 'svelte/store'
 
 import { loadResourcesList, loadResource } from 'src/api/resources.js'
-import { selectedPacks } from 'src/stores/packs.js'
+import { selectedPacks, makeStatus } from 'src/stores/packs.js'
 
 export async function makePack() {
 	let resources = new Set(),
@@ -16,6 +16,8 @@ export async function makePack() {
 		path
 
 	const selectedPacksList = Array.from(get(selectedPacks).values())
+
+	makeStatus.set('download')
 
 	// make resources list
 	for (let pack_path of selectedPacksList) {
@@ -42,6 +44,8 @@ export async function makePack() {
 
 	// write zip
 
+	makeStatus.set('zip')
+
 	const blobWriter = new zip.BlobWriter('application/zip')
 	const writer = new zip.ZipWriter(blobWriter)
 
@@ -67,6 +71,8 @@ export async function makePack() {
 	await writer.close()
 
 	downloadZip(blobWriter.getData())
+
+	makeStatus.set('none')
 }
 
 function downloadZip(blob) {
