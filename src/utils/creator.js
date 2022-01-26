@@ -14,17 +14,26 @@ import {
 } from 'src/stores/packs.js'
 
 export async function makePack() {
-	let resources = new Set(),
-		blobs = [],
-		returned,
-		path
-
 	const selectedPacksList = Array.from(get(selectedPacks).values())
 
 	makeStatus.set('download')
 
-	// make resources list
-	for (let pack_path of selectedPacksList) {
+	let resources = await makeResourcesList(selectedPacksList)
+	let blobs = await loadImages(resources)
+
+	makeStatus.set('zip')
+
+	downloadZip(await makeZip(blobs, selectedPacksList))
+
+	makeStatus.set('none')
+}
+
+async function makeResourcesList(selected) {
+	let resources = new Set(),
+		path,
+		returned
+
+	for (let pack_path of selected) {
 		// hardcode a little
 		path = 'resourcepacks/' + pack_path
 
@@ -38,11 +47,16 @@ export async function makePack() {
 		})
 	}
 
+	return resources
+}
+
+async function loadImages(resources) {
+	let blobs = []
+
 	downloadProgress.set(0)
 	const downloadCount = resources.size
 	let i = 0
 
-	// load images
 	for (let file of resources.values()) {
 		blobs.push({
 			name: file.name,
@@ -55,10 +69,10 @@ export async function makePack() {
 
 	downloadProgress.set(-1)
 
-	// write zip
+	return blobs
+}
 
-	makeStatus.set('zip')
-
+async function makeZip(blobs, selected) {
 	const blobWriter = new zip.BlobWriter('application/zip')
 	const writer = new zip.ZipWriter(blobWriter)
 
@@ -78,14 +92,11 @@ export async function makePack() {
 	await writer.add('pack.mcmeta', new zip.TextReader(mcmeta))
 
 	// info about archive
-	const packsString = selectedPacksList.map((p) => 'rp/' + p).join(';')
+	const packsString = selected.map((p) => 'rp/' + p).join(';')
 	await writer.add('info.txt', new zip.TextReader(packsString))
 
 	await writer.close()
-
-	downloadZip(blobWriter.getData())
-
-	makeStatus.set('none')
+	return blobWriter.getData()
 }
 
 function downloadZip(blob) {
