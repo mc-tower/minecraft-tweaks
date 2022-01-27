@@ -14,7 +14,10 @@ cd mc-tower
 and clone inside two repos - `minecraft-tweaks` *and* `packs`, then
 
 ```bash
-cd minecraft-tweaks
+cd packs
+yarn build
+
+cd ../minecraft-tweaks
 yarn install
 yarn dev
 ```
