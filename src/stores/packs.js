@@ -24,7 +24,7 @@ export const selectedPacks = setStore()
 // none, download, zip
 export const makeStatus = writable('none')
 
-export const downloadProgress = writable(-1)
+export const makeProgress = writable(-1)
 
 // ...makeStatus, waiting
 export const packStatus = derived(
