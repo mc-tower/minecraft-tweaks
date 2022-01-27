@@ -8,6 +8,7 @@ import { get } from 'svelte/store'
 
 import { loadResourcesList, loadResource } from 'src/api/resources.js'
 import { makeProgress, makeStatus, selectedPacks } from 'src/stores/packs.js'
+import { hashCode } from 'src/utils/hash.js'
 
 export async function makePack() {
 	const selectedPacksList = Array.from(get(selectedPacks).values())
@@ -19,7 +20,7 @@ export async function makePack() {
 
 	makeStatus.set('zip')
 
-	downloadZip(await makeZip(blobs, selectedPacksList))
+	downloadZip(...(await makeZip(blobs, selectedPacksList)))
 
 	makeStatus.set('none')
 }
@@ -101,17 +102,18 @@ async function makeZip(blobs, selected) {
 
 	// info about archive
 	const packsString = selected.map((p) => 'rp/' + p).join(';')
-	await writer.add('info.txt', new zip.TextReader(packsString))
+	const infoString = packsString
+	await writer.add('info.txt', new zip.TextReader(infoString))
 
 	makeProgress.set(-1)
 
 	await writer.close()
-	return blobWriter.getData()
+	return [blobWriter.getData(), hashCode(infoString)]
 }
 
-function downloadZip(blob) {
+function downloadZip(blob, hash = '') {
 	const a = document.createElement('a')
-	a.setAttribute('download', 'tweaks.zip')
+	a.setAttribute('download', `tweaks_h${hash}.zip`)
 	a.href = URL.createObjectURL(blob)
 	a.click()
 }
