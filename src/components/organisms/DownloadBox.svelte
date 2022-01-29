@@ -24,7 +24,9 @@
 	<Button on:click={makePack} disabled={$packStatus !== 'waiting'}>
 		{downloadButtonText($packStatus)}
 	</Button>
-	{#if $makeProgress >= 0}
-		{$makeProgress}%
-	{/if}
+	<span class="notranslate">
+		{#if $makeProgress >= 0}
+			{$makeProgress}%
+		{/if}
+	</span>
 </RoundedBox>
