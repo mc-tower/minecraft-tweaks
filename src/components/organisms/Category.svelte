@@ -32,9 +32,8 @@
 	{#if opened}
 		<div class="pt-6" transition:slide={{ duration: 100 }}>
 			{#each category.packs as pack (pack.id)}
-				<Checkbox
-					name={pack.id}
-					on:change={(e) => handleCheck(`${category.id}/${pack.id}`, e)}>
+				{@const path = category.id + '/' + pack.id}
+				<Checkbox name={path} on:change={(e) => handleCheck(path, e)}>
 					{pack.name}
 				</Checkbox>
 			{/each}
