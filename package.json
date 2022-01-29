@@ -11,6 +11,7 @@
     "test": "web-test-runner \"src/**/*.test.js\""
   },
   "devDependencies": {
+    "@minetower/ui-components": "git+https://github.com/minetower/ui-components.git",
     "@snowpack/app-scripts-svelte": "^2.0.0",
     "@snowpack/plugin-postcss": "^1.4.3",
     "@snowpack/plugin-svelte": "^3.3.0",
