@@ -4,11 +4,11 @@ Inspired by https://vanillatweaks.net
 
 ## Development
 
-Create folder `mc-tower`:
+Create folder `minetower`:
 
 ```bash
-mkdir mc-tower
-cd mc-tower
+mkdir minetower
+cd minetower
 ```
 
 and clone inside two repos - `minecraft-tweaks` *and* `packs`, then
