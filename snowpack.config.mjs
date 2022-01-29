@@ -1,5 +1,17 @@
 import proxy from 'http2-proxy'
 
+const defineRoute = (path, port) => ({
+	src: `/${path}/.*`,
+	dest: (req, res) => {
+		req.url = req.url.replace(new RegExp(`^\/${path}`), '')
+
+		return proxy.web(req, res, {
+			hostname: 'localhost',
+			port: port,
+		})
+	},
+})
+
 /** @type {import("snowpack").SnowpackUserConfig } */
 export default {
 	alias: {
@@ -15,17 +27,8 @@ export default {
 	},
 	plugins: ['@snowpack/plugin-svelte', '@snowpack/plugin-postcss'],
 	routes: [
-		{
-			src: '/packs/.*',
-			dest: (req, res) => {
-				req.url = req.url.replace(/^\/packs/, '')
-
-				return proxy.web(req, res, {
-					hostname: 'localhost',
-					port: 8081,
-				})
-			},
-		},
+		defineRoute('packs', 8081),
+		defineRoute('assets', 8082),
 		/* Enable an SPA Fallback in development: */
 		// { match: 'routes', src: '.*', dest: '/index.html' },
 	],
