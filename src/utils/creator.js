@@ -4,25 +4,29 @@
 
 import * as zip from '@zip.js/zip.js'
 
-import { get } from 'svelte/store'
-
 import { loadResourcesList, loadResource } from 'src/api/resources.js'
-import { makeProgress, makeStatus, selectedPacks } from 'src/stores/packs.js'
+import {
+	clearSelectedPacks,
+	getSelectedPacksList,
+	makeProgress,
+	makeStatus,
+} from 'src/stores/packs.js'
 import { hashCode } from 'src/utils/hash.js'
 
 export async function makePack() {
-	const selectedPacksList = Array.from(get(selectedPacks).values())
+	const selectedPacks = getSelectedPacksList()
 
 	makeStatus.set('download')
 
-	let resources = await makeResourcesList(selectedPacksList)
+	let resources = await makeResourcesList(selectedPacks)
 	let blobs = await loadImages(resources)
 
 	makeStatus.set('zip')
 
-	downloadZip(...(await makeZip(blobs, selectedPacksList)))
+	downloadZip(...(await makeZip(blobs, selectedPacks)))
 
 	makeStatus.set('none')
+	clearSelectedPacks()
 }
 
 async function makeResourcesList(selected) {

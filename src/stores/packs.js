@@ -1,25 +1,31 @@
-import { derived, writable } from 'svelte/store'
+import { derived, get, writable } from 'svelte/store'
 
-function setStore() {
-	const { subscribe, set, update } = writable(new Set())
+import { sessionStore } from 'svelte-storages'
 
-	return {
-		subscribe,
-		set,
-		add: (element) =>
-			update((elements) => {
-				elements.add(element)
-				return elements
-			}),
-		delete: (element) =>
-			update((elements) => {
-				elements.delete(element)
-				return elements
-			}),
-	}
+/**
+ * Selected packs
+ *
+ * ```js
+ * {
+ *   'pack': true,
+ *   'pack2': false,
+ * }
+ * ```
+ *
+ * where keys are `category_id/pack_id`
+ *
+ * @type {[type]}
+ */
+export const selectedPacks = sessionStore()
+
+export function getSelectedPacksList() {
+	let packs = get(selectedPacks)
+	return Object.keys(packs).filter((i) => packs[i])
 }
 
-export const selectedPacks = setStore()
+export function clearSelectedPacks() {
+	Object.keys(get(selectedPacks)).forEach((p) => selectedPacks.set(p, false))
+}
 
 // none, download, zip
 export const makeStatus = writable('none')
@@ -30,7 +36,7 @@ export const makeProgress = writable(-1)
 export const packStatus = derived(
 	[selectedPacks, makeStatus],
 	([$selectedPacks, $makeStatus], set) => {
-		if ($selectedPacks.size !== 0) {
+		if (Object.values($selectedPacks).some(Boolean)) {
 			set($makeStatus === 'none' ? 'waiting' : $makeStatus)
 		} else {
 			set('none')

@@ -14,17 +14,9 @@
 	function toggleOpen() {
 		opened = !opened
 	}
-
-	function handleCheck(pack_path, e) {
-		if (e.target.checked) {
-			selectedPacks.add(pack_path)
-		} else {
-			selectedPacks.delete(pack_path)
-		}
-	}
 </script>
 
-<RoundedBox color="bg-slate-700">
+<RoundedBox color="bg-slate-700" className="select-none">
 	<h5 class="text-3xl cursor-pointer" on:click={toggleOpen}>
 		{category.name}
 	</h5>
@@ -33,7 +25,7 @@
 		<div class="pt-6" transition:slide={{ duration: 100 }}>
 			{#each category.packs as pack (pack.id)}
 				{@const path = category.id + '/' + pack.id}
-				<Checkbox name={path} on:change={(e) => handleCheck(path, e)}>
+				<Checkbox name={path} bind:checked={$selectedPacks[path]}>
 					{pack.name}
 				</Checkbox>
 			{/each}

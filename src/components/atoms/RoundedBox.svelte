@@ -1,7 +1,8 @@
 <script>
-	export let color
+	export let color,
+		className = ''
 </script>
 
-<div class="{color} p-4 rounded-xl m-2">
+<div class="{color} {className} p-4 rounded-xl m-2">
 	<slot />
 </div>
