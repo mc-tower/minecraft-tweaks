@@ -5,5 +5,9 @@
 	import ResourcePacks from 'src/components/pages/ResourcePacks.svelte'
 </script>
 
-<Navbar title="Minecraft Tweaks" repo_url="/minecraft-tweaks" center_title />
+<Navbar
+	title="Minecraft Tweaks"
+	small_title="Tweaks"
+	repo_url="/minecraft-tweaks"
+	center_title />
 <ResourcePacks />

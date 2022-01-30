@@ -9,7 +9,7 @@
 			type="checkbox"
 			on:change
 			id={name} />
-		<label class="form-check-label select-none" for={name}>
+		<label class="form-check-label cursor-pointer select-none" for={name}>
 			<slot />
 		</label>
 	</div>

@@ -1152,7 +1152,7 @@
 
 "@minetower/ui-components@git+https://github.com/minetower/ui-components.git":
   version "1.0.0"
-  resolved "git+https://github.com/minetower/ui-components.git#d2159a3a933af9a880baf94e5ceb9267b4f4a1b1"
+  resolved "git+https://github.com/minetower/ui-components.git#1d1aeff01aa0b06454b3b5f768955c805f330ebe"
 
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
