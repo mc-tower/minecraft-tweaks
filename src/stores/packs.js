@@ -30,6 +30,7 @@ export function clearSelectedPacks() {
 // none, download, zip
 export const makeStatus = writable('none')
 
+// percentage
 export const makeProgress = writable(-1)
 
 // ...makeStatus, waiting

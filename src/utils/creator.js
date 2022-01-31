@@ -101,8 +101,7 @@ async function makeZip(blobs, selected) {
 
 	await writer.add('pack.mcmeta', new zip.TextReader(mcmeta))
 
-	i += 1
-	makeProgress.set(Math.floor((i * 100) / downloadCount))
+	makeProgress.set(Math.floor(((i + 1) * 100) / downloadCount))
 
 	// info about archive
 	const packsString = selected.map((p) => 'rp/' + p).join(';')
