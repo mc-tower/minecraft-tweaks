@@ -31,6 +31,7 @@ export async function makePack() {
 
 async function makeResourcesList(selected) {
 	let resources = new Set(),
+		resources_files = new Set(),
 		path,
 		returned
 
@@ -40,11 +41,18 @@ async function makeResourcesList(selected) {
 
 		returned = await loadResourcesList(path)
 
+		// not store pack if resulting resources already has
+		// resources with the same names
+		if (returned.files.some((f) => resources_files.has(f))) {
+			continue
+		}
+
 		returned.files.forEach((file) => {
 			resources.add({
 				name: file,
 				path: `${path}/${file}`,
 			})
+			resources_files.add(file)
 		})
 	}
 

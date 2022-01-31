@@ -2,7 +2,11 @@
 	import Button from 'src/components/atoms/Button.svelte'
 	import RoundedBox from 'src/components/atoms/RoundedBox.svelte'
 
-	import { makeProgress, packStatus } from 'src/stores/packs.js'
+	import {
+		makeProgress,
+		packStatus,
+		selectedPacksOrder,
+	} from 'src/stores/packs.js'
 
 	import { makePack } from 'src/utils/creator.js'
 
@@ -20,7 +24,13 @@
 </script>
 
 <RoundedBox color="bg-slate-800">
-	<h5 class="text-2xl pb-6">Selector</h5>
+	<h5 class="text-2xl pb-4">
+		Selector
+		{#if $selectedPacksOrder.size}
+			({$selectedPacksOrder.size})
+		{/if}
+	</h5>
+
 	<Button on:click={makePack} disabled={$packStatus !== 'waiting'}>
 		{downloadButtonText($packStatus)}
 	</Button>

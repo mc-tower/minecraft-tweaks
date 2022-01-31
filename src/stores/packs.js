@@ -2,6 +2,8 @@ import { derived, get, writable } from 'svelte/store'
 
 import { sessionStore } from 'svelte-storages'
 
+import { sessionSetStore } from 'src/stores/sessionSetStore.js'
+
 /**
  * Selected packs
  *
@@ -16,7 +18,7 @@ import { sessionStore } from 'svelte-storages'
  *
  * @type {[type]}
  */
-export const selectedPacks = sessionStore()
+export const selectedPacks = sessionStore('selected')
 
 export function getSelectedPacksList() {
 	let packs = get(selectedPacks)
@@ -26,6 +28,9 @@ export function getSelectedPacksList() {
 export function clearSelectedPacks() {
 	Object.keys(get(selectedPacks)).forEach((p) => selectedPacks.set(p, false))
 }
+
+// save insertion order
+export const selectedPacksOrder = sessionSetStore('selected-order')
 
 // none, download, zip
 export const makeStatus = writable('none')
