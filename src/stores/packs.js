@@ -20,6 +20,9 @@ import { sessionSetStore } from 'src/stores/sessionSetStore.js'
  */
 export const selectedPacks = sessionStore('selected')
 
+// save insertion order
+export const selectedPacksOrder = sessionSetStore('selected-order')
+
 export function getSelectedPacksList() {
 	let packs = get(selectedPacks)
 	return Object.keys(packs).filter((i) => packs[i])
@@ -27,10 +30,8 @@ export function getSelectedPacksList() {
 
 export function clearSelectedPacks() {
 	Object.keys(get(selectedPacks)).forEach((p) => selectedPacks.set(p, false))
+	selectedPacksOrder.clear()
 }
-
-// save insertion order
-export const selectedPacksOrder = sessionSetStore('selected-order')
 
 // none, download, zip
 export const makeStatus = writable('none')

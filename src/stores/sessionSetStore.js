@@ -28,5 +28,11 @@ export function sessionSetStore(name) {
 				storage.setItem(name, toString(data))
 				return data
 			}),
+		clear: () =>
+			update((data) => {
+				data.clear()
+				storage.setItem(name, toString(data))
+				return data
+			}),
 	}
 }
