@@ -16,6 +16,12 @@ export function sessionSetStore(name) {
 
 	return {
 		subscribe,
+		set: (list) =>
+			update((data) => {
+				data = new Set(list)
+				storage.setItem(name, toString(data))
+				return data
+			}),
 		add: (value) =>
 			update((data) => {
 				data.add(value)

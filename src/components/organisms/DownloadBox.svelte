@@ -4,6 +4,7 @@
 	import SelectedList from 'src/components/molecules/SelectedList.svelte'
 
 	import {
+		allPacks,
 		makeProgress,
 		packStatus,
 		selectedPacksOrder,
@@ -32,7 +33,9 @@
 		{/if}
 	</h5>
 
-	<SelectedList />
+	{#if Object.keys($allPacks).length}
+		<SelectedList />
+	{/if}
 
 	<Button on:click={makePack} disabled={$packStatus !== 'waiting'}>
 		{downloadButtonText($packStatus)}

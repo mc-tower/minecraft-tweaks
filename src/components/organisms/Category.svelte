@@ -15,7 +15,7 @@
 </script>
 
 <RoundedBox color="bg-slate-700" className="select-none">
-	<h5 class="text-3xl cursor-pointer" on:click={toggleOpen}>
+	<h5 class="text-3xl cursor-pointer" role="button" on:click={toggleOpen}>
 		{category.name}
 	</h5>
 
