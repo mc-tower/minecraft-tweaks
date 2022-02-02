@@ -1,5 +1,8 @@
 <script context="module">
-	import { getNamesByIds, selectedPacksOrder } from 'src/stores/packs.js'
+	import {
+		allPacksMapping as packs,
+		selectedPacksOrder,
+	} from 'src/stores/packs.js'
 </script>
 
 <script>
@@ -7,8 +10,11 @@
 		dragging_ind = -1
 
 	$: ids = Array.from($selectedPacksOrder)
-	$: names = getNamesByIds(ids)
-	$: mapping = ids.map((_, ind) => [ind, names[ind]])
+	$: incompatibles = ids.map((id, ind) =>
+		// find packs that will be overwritten by packs from the top
+		ids.slice(0, ind).some((p) => $packs[p].incompatible.some((i) => id === i))
+	)
+	$: mapping = ids.map((id, ind) => [ind, $packs[id]?.name])
 
 	function handleDragEnd() {
 		dragover_ind = -1
@@ -54,6 +60,7 @@
 			on:dragend={handleDragEnd}
 			on:drop={handleDrop}
 			class:opacity-50={dragging_ind === id || dragover_ind === id}
+			class:text-red-500={incompatibles[id]}
 			class="bg-slate-700 px-2 mb-1 rounded flex justify-between">
 			<i>{name}</i>
 			<img

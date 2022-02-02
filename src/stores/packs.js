@@ -7,15 +7,25 @@ import { sessionSetStore } from 'src/stores/sessionSetStore.js'
 // listing of all packs
 export const allPacks = writable({})
 
-export function getNamesByIds(ids) {
-	let packs = get(allPacks)
-	return ids.map((id) => {
-		let [category, pack] = id.split('/')
-		return packs?.categories
-			.find((e) => e.id === category)
-			?.packs.find((e) => e.id === pack)?.name
+export const allPacksMapping = derived(allPacks, ($allPacks, set) => {
+	if (Object.keys($allPacks).length === 0) {
+		set({})
+	}
+
+	let mapping = {}
+
+	$allPacks.categories.forEach((c) => {
+		c.packs.forEach((p) => {
+			mapping[c.id + '/' + p.id] = {
+				description: p.description,
+				name: p.name,
+				incompatible: p.incompatible,
+			}
+		})
 	})
-}
+
+	set(mapping)
+})
 
 /**
  * Selected packs

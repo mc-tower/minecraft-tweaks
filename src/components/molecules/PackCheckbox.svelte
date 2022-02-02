@@ -3,7 +3,7 @@
 	import Tooltip from 'src/components/atoms/Tooltip.svelte'
 
 	import {
-		getNamesByIds,
+		allPacksMapping,
 		selectedPacks,
 		selectedPacksOrder,
 	} from 'src/stores/packs.js'
@@ -19,6 +19,7 @@
 	$: currently_incompatible =
 		$selectedPacks[path] &&
 		incompatible_list.some((p) => $selectedPacksOrder.has(p))
+	$: incompatibles = incompatible_list.map((p) => $allPacksMapping[p].name)
 
 	function handleCheck(path, e) {
 		if (e.target.checked) {
@@ -31,8 +32,8 @@
 
 <Tooltip show={incompatible_list.length > 0}>
 	<svelte:fragment slot="tooltip">
-		<span class={danger_text}> Incompatible with </span>
-		{getNamesByIds(incompatible_list).join(', ')}
+		<span class={danger_text}>Incompatible with</span>
+		{incompatibles.join(', ')}
 	</svelte:fragment>
 
 	<Checkbox
