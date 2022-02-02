@@ -5,20 +5,27 @@
 </script>
 
 <script>
-	export let path, name
+	export let path,
+		name,
+		incompatible_list = []
 
-	function handleCheck(pack_path, e) {
+	$: currently_incompatible =
+		$selectedPacks[path] &&
+		incompatible_list.some((p) => $selectedPacksOrder.has(p))
+
+	function handleCheck(path, e) {
 		if (e.target.checked) {
-			selectedPacksOrder.add(pack_path)
+			selectedPacksOrder.add(path)
 		} else {
-			selectedPacksOrder.delete(pack_path)
+			selectedPacksOrder.delete(path)
 		}
 	}
 </script>
 
 <Checkbox
-	name={path}
+	id={path}
 	on:change={(e) => handleCheck(path, e)}
-	bind:checked={$selectedPacks[path]}>
+	bind:checked={$selectedPacks[path]}
+	text_class={currently_incompatible ? 'text-red-500' : ''}>
 	{name}
 </Checkbox>

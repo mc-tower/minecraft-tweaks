@@ -1,5 +1,7 @@
 <script>
-	export let name, checked
+	export let id,
+		checked,
+		text_class = ''
 </script>
 
 <div class="flex">
@@ -9,8 +11,8 @@
 			type="checkbox"
 			bind:checked
 			on:change
-			id={name} />
-		<label class="form-check-label cursor-pointer" for={name}>
+			{id} />
+		<label class="form-check-label cursor-pointer {text_class}" for={id}>
 			<slot />
 		</label>
 	</div>

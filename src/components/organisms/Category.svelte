@@ -22,7 +22,10 @@
 	{#if opened}
 		<div class="pt-6" transition:slide={{ duration: 100 }}>
 			{#each category.packs as pack (pack.id)}
-				<PackCheckbox path={category.id + '/' + pack.id} name={pack.name} />
+				<PackCheckbox
+					path={category.id + '/' + pack.id}
+					name={pack.name}
+					incompatible_list={pack.incompatible} />
 			{/each}
 		</div>
 	{/if}
