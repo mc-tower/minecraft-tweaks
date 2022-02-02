@@ -4,6 +4,19 @@ import { sessionStore } from 'svelte-storages'
 
 import { sessionSetStore } from 'src/stores/sessionSetStore.js'
 
+// listing of all packs
+export const allPacks = writable({})
+
+export function getNamesByIds(ids) {
+	let packs = get(allPacks)
+	return ids.map((id) => {
+		let [category, pack] = id.split('/')
+		return packs?.categories
+			.find((e) => e.id === category)
+			?.packs.find((e) => e.id === pack)?.name
+	})
+}
+
 /**
  * Selected packs
  *

@@ -1,7 +1,14 @@
 <script context="module">
 	import Checkbox from 'src/components/atoms/Checkbox.svelte'
+	import Tooltip from 'src/components/atoms/Tooltip.svelte'
 
-	import { selectedPacks, selectedPacksOrder } from 'src/stores/packs.js'
+	import {
+		getNamesByIds,
+		selectedPacks,
+		selectedPacksOrder,
+	} from 'src/stores/packs.js'
+
+	const danger_text = 'text-red-500'
 </script>
 
 <script>
@@ -22,10 +29,18 @@
 	}
 </script>
 
-<Checkbox
-	id={path}
-	on:change={(e) => handleCheck(path, e)}
-	bind:checked={$selectedPacks[path]}
-	text_class={currently_incompatible ? 'text-red-500' : ''}>
-	{name}
-</Checkbox>
+<Tooltip show={incompatible_list.length > 0}>
+	<svelte:fragment slot="tooltip">
+		<span class={danger_text}> Incompatible with </span>
+		{getNamesByIds(incompatible_list).join(', ')}
+	</svelte:fragment>
+
+	<Checkbox
+		slot="content"
+		id={path}
+		on:change={(e) => handleCheck(path, e)}
+		bind:checked={$selectedPacks[path]}
+		text_class={currently_incompatible ? danger_text : ''}>
+		{name}
+	</Checkbox>
+</Tooltip>
