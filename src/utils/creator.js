@@ -13,7 +13,7 @@ import {
 } from 'src/stores/packs.js'
 import { hashCode } from 'src/utils/hash.js'
 
-export async function makePack() {
+export async function makePack(pack_format) {
 	const selectedPacks = getSelectedPacksList()
 
 	makeStatus.set('download')
@@ -23,7 +23,7 @@ export async function makePack() {
 
 	makeStatus.set('zip')
 
-	downloadZip(...(await makeZip(blobs, selectedPacks)))
+	downloadZip(...(await makeZip(blobs, selectedPacks, pack_format)))
 
 	makeStatus.set('none')
 	clearSelectedPacks()
@@ -81,7 +81,7 @@ async function loadImages(resources) {
 	return blobs
 }
 
-async function makeZip(blobs, selected) {
+async function makeZip(blobs, selected, pack_format) {
 	makeProgress.set(0)
 
 	// 2 files additionally
@@ -102,7 +102,7 @@ async function makeZip(blobs, selected) {
 	// pack.mcmeta
 	const mcmeta = JSON.stringify({
 		pack: {
-			pack_format: 8,
+			pack_format,
 			description: 'Minecraft tweaks',
 		},
 	})

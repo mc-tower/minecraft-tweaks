@@ -15,6 +15,7 @@
 
 	import { makePack } from 'src/utils/creator.js'
 	import { getPackInfo } from 'src/utils/extractor.js'
+	import { pack_format_mapping } from 'src/utils/pack_format.js'
 
 	function downloadButtonText(status) {
 		switch (status) {
@@ -30,7 +31,8 @@
 </script>
 
 <script>
-	let uploaded = null
+	let uploaded = null,
+		pack_format = '8'
 
 	async function onFileUpload() {
 		if (uploaded) {
@@ -56,9 +58,24 @@
 		<SelectedList />
 	{/if}
 
+	{#if $selectedPacksOrder.size}
+		<div class="flex justify-between">
+			<select
+				name="pack_format"
+				bind:value={pack_format}
+				class="rounded mb-3 bg-slate-800">
+				{#each Object.keys(pack_format_mapping).reverse() as format}
+					<option value={format}>{pack_format_mapping[format]}</option>
+				{/each}
+			</select>
+		</div>
+	{/if}
+
 	<div class="flex justify-between">
 		<span>
-			<Button on:click={makePack} disabled={$packStatus !== 'waiting'}>
+			<Button
+				on:click={() => makePack(pack_format)}
+				disabled={$packStatus !== 'waiting'}>
 				{downloadButtonText($packStatus)}
 			</Button>
 			<span class="notranslate">
