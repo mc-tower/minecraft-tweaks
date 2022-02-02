@@ -56,7 +56,12 @@
 			class:opacity-50={dragging_ind === id || dragover_ind === id}
 			class="bg-slate-700 px-2 mb-1 rounded flex justify-between">
 			<i>{name}</i>
-			<img src="/assets/images/drag-horizontal.svg" alt="" draggable="false" />
+			<img
+				src="/assets/images/drag-horizontal.svg"
+				width="17"
+				class="hidden md:block"
+				draggable="false"
+				alt="" />
 		</li>
 	{/each}
 </ul>

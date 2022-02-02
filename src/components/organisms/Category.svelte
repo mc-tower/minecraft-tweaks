@@ -20,7 +20,7 @@
 	</h5>
 
 	{#if opened}
-		<div class="pt-6" transition:slide={{ duration: 100 }}>
+		<div class="mt-3" transition:slide={{ duration: 100 }}>
 			{#each category.packs as pack (pack.id)}
 				<PackCheckbox
 					path={category.id + '/' + pack.id}
