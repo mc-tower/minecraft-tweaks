@@ -26,7 +26,7 @@
 	}
 </script>
 
-<RoundedBox color="bg-slate-800">
+<RoundedBox class="bg-slate-800">
 	<h5 class="text-2xl mb-3">
 		Selector
 		{#if $selectedPacksOrder.size}

@@ -13,7 +13,7 @@
 			{#if Object.keys(list).length}
 				<PacksList {list} />
 			{:else}
-				<RoundedBox color="bg-slate-700">
+				<RoundedBox class="bg-slate-700">
 					Cannot load resource packs list.
 				</RoundedBox>
 			{/if}
