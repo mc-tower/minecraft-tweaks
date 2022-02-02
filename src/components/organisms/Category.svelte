@@ -1,10 +1,8 @@
 <script context="module">
 	import { slide } from 'svelte/transition'
 
-	import Checkbox from 'src/components/atoms/Checkbox.svelte'
 	import RoundedBox from 'src/components/atoms/RoundedBox.svelte'
-
-	import { selectedPacks, selectedPacksOrder } from 'src/stores/packs.js'
+	import PackCheckbox from 'src/components/molecules/PackCheckbox.svelte'
 </script>
 
 <script>
@@ -13,14 +11,6 @@
 	let opened = false
 	function toggleOpen() {
 		opened = !opened
-	}
-
-	function handleCheck(pack_path, e) {
-		if (e.target.checked) {
-			selectedPacksOrder.add(pack_path)
-		} else {
-			selectedPacksOrder.delete(pack_path)
-		}
 	}
 </script>
 
@@ -32,13 +22,7 @@
 	{#if opened}
 		<div class="pt-6" transition:slide={{ duration: 100 }}>
 			{#each category.packs as pack (pack.id)}
-				{@const path = category.id + '/' + pack.id}
-				<Checkbox
-					name={path}
-					on:change={(e) => handleCheck(path, e)}
-					bind:checked={$selectedPacks[path]}>
-					{pack.name}
-				</Checkbox>
+				<PackCheckbox path={category.id + '/' + pack.id} name={pack.name} />
 			{/each}
 		</div>
 	{/if}
