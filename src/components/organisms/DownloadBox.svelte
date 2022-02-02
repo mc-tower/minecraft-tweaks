@@ -1,6 +1,7 @@
 <script context="module">
 	import Button from 'src/components/atoms/Button.svelte'
 	import RoundedBox from 'src/components/atoms/RoundedBox.svelte'
+	import SelectedList from 'src/components/molecules/SelectedList.svelte'
 
 	import {
 		makeProgress,
@@ -30,6 +31,8 @@
 			({$selectedPacksOrder.size})
 		{/if}
 	</h5>
+
+	<SelectedList />
 
 	<Button on:click={makePack} disabled={$packStatus !== 'waiting'}>
 		{downloadButtonText($packStatus)}
