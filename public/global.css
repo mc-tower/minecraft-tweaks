@@ -1,3 +1,11 @@
+@font-face {
+	font-family: Nunito;
+	src: url("/assets/fonts/nunito-font/nunito-vf.ttf"),
+		url('https://fonts.googleapis.com/css2?family=Nunito:wght@400&display=swap');
+	font-weight: 400;
+}
+
 body {
 	background: url("/assets/images/dirt.png") repeat;
+	font-family: 'Nunito', sans-serif;
 }
