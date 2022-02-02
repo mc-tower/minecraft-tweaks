@@ -18,11 +18,11 @@
 				bind:files
 				on:change
 				bind:this={input}
-				class="absolute w-full h-full opacity-0 -z-10"
+				class="hidden"
 				title="" />
 
 			<div class="py-1 px-2 text-center cursor-pointer">
-				<p class="m-0">{displayed}</p>
+				<p>{displayed}</p>
 			</div>
 		</div>
 	</div>

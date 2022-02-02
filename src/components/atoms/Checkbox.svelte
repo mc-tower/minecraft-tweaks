@@ -1,7 +1,5 @@
 <script>
-	export let id,
-		checked,
-		text_class = ''
+	export let id, checked
 </script>
 
 <div class="flex">
@@ -12,7 +10,7 @@
 			bind:checked
 			on:change
 			{id} />
-		<label class="form-check-label cursor-pointer {text_class}" for={id}>
+		<label class="form-check-label cursor-pointer {$$props.class}" for={id}>
 			<slot />
 		</label>
 	</div>

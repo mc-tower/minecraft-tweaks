@@ -40,7 +40,7 @@
 		id={path}
 		on:change={(e) => handleCheck(path, e)}
 		bind:checked={$selectedPacks[path]}
-		text_class={currently_incompatible ? danger_text : ''}>
+		class={currently_incompatible ? danger_text : ''}>
 		{name}
 	</Checkbox>
 </Tooltip>
