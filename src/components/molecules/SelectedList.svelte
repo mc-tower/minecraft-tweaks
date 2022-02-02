@@ -45,7 +45,7 @@
 	}
 </script>
 
-<ul class="my-2">
+<ul class="mb-4">
 	{#each mapping as [id, name]}
 		<li
 			draggable="true"

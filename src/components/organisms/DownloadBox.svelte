@@ -5,6 +5,7 @@
 
 	import {
 		allPacks,
+		clearSelectedPacks,
 		makeProgress,
 		packStatus,
 		selectedPacksOrder,
@@ -26,7 +27,7 @@
 </script>
 
 <RoundedBox color="bg-slate-800">
-	<h5 class="text-2xl pb-4">
+	<h5 class="text-2xl mb-3">
 		Selector
 		{#if $selectedPacksOrder.size}
 			({$selectedPacksOrder.size})
@@ -37,12 +38,17 @@
 		<SelectedList />
 	{/if}
 
-	<Button on:click={makePack} disabled={$packStatus !== 'waiting'}>
-		{downloadButtonText($packStatus)}
-	</Button>
-	<span class="notranslate">
-		{#if $makeProgress >= 0}
-			{$makeProgress}%
-		{/if}
-	</span>
+	<div class="flex justify-between">
+		<span>
+			<Button on:click={makePack} disabled={$packStatus !== 'waiting'}>
+				{downloadButtonText($packStatus)}
+			</Button>
+			<span class="notranslate">
+				{#if $makeProgress >= 0}
+					{$makeProgress}%
+				{/if}
+			</span>
+		</span>
+		<Button on:click={clearSelectedPacks} light>Clear</Button>
+	</div>
 </RoundedBox>
