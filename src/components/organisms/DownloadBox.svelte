@@ -27,12 +27,7 @@
 </script>
 
 <RoundedBox class="bg-slate-800">
-	<h5 class="text-2xl mb-3">
-		Selector
-		{#if $selectedPacksOrder.size}
-			({$selectedPacksOrder.size})
-		{/if}
-	</h5>
+	<h5 class="text-2xl mb-3">Selector</h5>
 
 	{#if Object.keys($allPacks).length}
 		<SelectedList />
