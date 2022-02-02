@@ -45,7 +45,7 @@
 	}
 </script>
 
-<ul class="mb-2 mt-1">
+<ul class="my-2">
 	{#each mapping as [id, name]}
 		<li
 			draggable="true"
@@ -54,8 +54,19 @@
 			on:dragend={handleDragEnd}
 			on:drop={handleDrop}
 			class:opacity-50={dragging_ind === id || dragover_ind === id}
-			class="bg-slate-700 pl-2 mb-1 rounded cursor-move">
+			class="bg-slate-700 px-2 mb-1 rounded flex justify-between">
 			<i>{name}</i>
+			<img src="/assets/images/drag-horizontal.svg" alt="" draggable="false" />
 		</li>
 	{/each}
 </ul>
+
+<style>
+	li {
+		cursor: move;
+		cursor: grab;
+	}
+	img {
+		filter: invert(0.8);
+	}
+</style>
