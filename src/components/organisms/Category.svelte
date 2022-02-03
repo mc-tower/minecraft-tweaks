@@ -3,6 +3,8 @@
 
 	import RoundedBox from 'src/components/atoms/RoundedBox.svelte'
 	import PackCheckbox from 'src/components/molecules/PackCheckbox.svelte'
+
+	import { a11yClick } from 'src/actions/focusClick.js'
 </script>
 
 <script>
@@ -15,7 +17,11 @@
 </script>
 
 <RoundedBox class="bg-slate-700 select-none">
-	<h5 class="text-3xl cursor-pointer" role="button" on:click={toggleOpen}>
+	<h5
+		class="text-3xl cursor-pointer"
+		role="button"
+		on:click={toggleOpen}
+		use:a11yClick>
 		{category.name}
 	</h5>
 
