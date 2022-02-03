@@ -66,7 +66,6 @@
 			<img
 				src="/assets/images/drag-horizontal.svg"
 				width="17"
-				class="hidden md:block"
 				draggable="false"
 				alt="" />
 		</li>
@@ -80,5 +79,10 @@
 	}
 	img {
 		filter: invert(0.8);
+	}
+	@media (pointer: coarse) {
+		img {
+			@apply hidden;
+		}
 	}
 </style>
