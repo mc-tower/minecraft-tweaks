@@ -71,7 +71,7 @@
 		</div>
 	{/if}
 
-	<div class="flex justify-between">
+	<div class="flex justify-between mb-3">
 		<span>
 			<Button
 				on:click={() => makePack(pack_format)}

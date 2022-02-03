@@ -5,7 +5,7 @@
 	$: displayed = files ? files[0].name : text
 </script>
 
-<div class="mx-auto mt-3">
+<div class="mx-auto">
 	<div class="relative rounded">
 		<div
 			class="relative border border-gray-200 border-dashed rounded cursor-pointer">
