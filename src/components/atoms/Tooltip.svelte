@@ -18,7 +18,7 @@
 		@apply invisible absolute;
 	}
 	.has-tooltip:hover .tooltip,
-	.show {
+	.has-tooltip .show {
 		@apply visible z-50;
 	}
 </style>
