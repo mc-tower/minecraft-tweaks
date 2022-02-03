@@ -8,7 +8,7 @@
 <button
 	type="button"
 	on:click
-	class="py-2 px-3 {bg} hover:bg-indigo-700 disabled:bg-indigo-300 text-white font-semibold rounded-md focus:outline-none {$$props.class}"
+	class="py-2 px-3 {bg} hover:bg-indigo-700 disabled:bg-indigo-300 text-white font-semibold rounded-md focus:outline-none focus:bg-indigo-700 {$$props.class}"
 	class:cursor-pointer={!disabled}
 	{disabled}>
 	<slot />

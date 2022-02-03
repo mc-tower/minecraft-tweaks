@@ -15,6 +15,7 @@
 				bind:files
 				on:change
 				class="absolute w-full h-full opacity-0 z-50"
+				tabindex="0"
 				title="" />
 
 			<div class="py-1 px-2 text-center">
@@ -28,5 +29,8 @@
 	input[type='file'],
 	input[type='file']::-webkit-file-upload-button {
 		@apply cursor-pointer;
+	}
+	input:focus + div {
+		@apply text-white;
 	}
 </style>
