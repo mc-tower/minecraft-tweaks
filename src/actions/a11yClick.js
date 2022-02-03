@@ -3,7 +3,7 @@
  *
  * This will add tabindex="0" attribute and
  * will fire `click` event on `keydown` events
- * for keys `Space`, `Enter`, `ArrowDown`, `ArrowUp`
+ * for keys `Space`, `Enter`, `NumpadEnter`, `ArrowDown`, `ArrowUp`
  *
  * ```svelte
  * <div on:click={handleClick} use:a11yClick>
@@ -24,7 +24,7 @@
  */
 export function a11yClick(
 	node,
-	codes_list = ['Space', 'Enter', 'ArrowDown', 'ArrowUp']
+	codes_list = ['Space', 'Enter', 'NumpadEnter', 'ArrowDown', 'ArrowUp']
 ) {
 	const codes = new Set(codes_list)
 
