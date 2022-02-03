@@ -9,6 +9,8 @@
 			type="checkbox"
 			bind:checked
 			on:change
+			on:focus
+			on:blur
 			{id} />
 		<label class="form-check-label cursor-pointer {$$props.class}" for={id}>
 			<slot />

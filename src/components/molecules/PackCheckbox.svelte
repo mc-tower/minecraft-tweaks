@@ -16,6 +16,8 @@
 		name,
 		incompatible_list = []
 
+	let show_tooltip = false
+
 	$: currently_incompatible =
 		$selectedPacks[path] &&
 		incompatible_list.some((p) => $selectedPacksOrder.has(p))
@@ -30,7 +32,7 @@
 	}
 </script>
 
-<Tooltip show={incompatible_list.length > 0}>
+<Tooltip has_tooltip={incompatible_list.length > 0} show={show_tooltip}>
 	<svelte:fragment slot="tooltip">
 		<span class={danger_text}>Incompatible with</span>
 		{incompatibles.join(', ')}
@@ -41,6 +43,8 @@
 		id={path}
 		on:change={(e) => handleCheck(path, e)}
 		bind:checked={$selectedPacks[path]}
+		on:focus={() => (show_tooltip = true)}
+		on:blur={() => (show_tooltip = false)}
 		class={currently_incompatible ? danger_text : ''}>
 		{name}
 	</Checkbox>
