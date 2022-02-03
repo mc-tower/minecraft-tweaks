@@ -4,7 +4,7 @@
 	import RoundedBox from 'src/components/atoms/RoundedBox.svelte'
 	import PackCheckbox from 'src/components/molecules/PackCheckbox.svelte'
 
-	import { a11yClick } from 'src/actions/focusClick.js'
+	import { a11yClick } from 'src/actions/a11yClick.js'
 </script>
 
 <script>
