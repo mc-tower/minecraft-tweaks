@@ -34,6 +34,8 @@
 	let uploaded = null,
 		pack_format = '8'
 
+	$: some_packs_selected = $selectedPacksOrder.size
+
 	async function onFileUpload() {
 		if (uploaded) {
 			let info = await getPackInfo(uploaded[0])
@@ -52,13 +54,23 @@
 </script>
 
 <RoundedBox class="bg-slate-800">
-	<h5 class="text-2xl mb-3">Selector</h5>
+	<span class="flex justify-between mb-3">
+		<h5 class="text-2xl">Selector</h5>
+		{#if some_packs_selected}
+			<img
+				on:click={clearSelectedPacks}
+				src="/assets/images/icons/clear.svg"
+				class="m-0 p-0 cursor-pointer"
+				title="Clear"
+				alt="clear" />
+		{/if}
+	</span>
 
 	{#if Object.keys($allPacks).length}
 		<SelectedList />
 	{/if}
 
-	{#if $selectedPacksOrder.size}
+	{#if some_packs_selected}
 		<div class="flex justify-between">
 			<select
 				name="pack_format"
@@ -84,7 +96,6 @@
 				{/if}
 			</span>
 		</span>
-		<Button on:click={clearSelectedPacks} light>Clear</Button>
 	</div>
 
 	<FileInput
@@ -92,3 +103,9 @@
 		bind:files={uploaded}
 		on:change={onFileUpload} />
 </RoundedBox>
+
+<style>
+	img {
+		filter: invert(1);
+	}
+</style>
