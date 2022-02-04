@@ -1,5 +1,6 @@
 <script context="module">
 	import Button from 'src/components/atoms/Button.svelte'
+	import ClearIcon from '../atoms/ClearIcon.svelte'
 	import FileInput from 'src/components/atoms/FileInput.svelte'
 	import RoundedBox from 'src/components/atoms/RoundedBox.svelte'
 
@@ -58,13 +59,7 @@
 	<span class="flex justify-between mb-3">
 		<h5 class="text-2xl">Selector</h5>
 		{#if some_packs_selected}
-			<img
-				on:click={clearSelectedPacks}
-				src="/assets/images/icons/clear.svg"
-				class="m-0 p-0 cursor-pointer"
-				title="Clear"
-				tabindex="0"
-				alt="clear" />
+			<ClearIcon on:click={clearSelectedPacks} />
 		{/if}
 	</span>
 
@@ -96,9 +91,3 @@
 		bind:files={uploaded}
 		on:change={onFileUpload} />
 </RoundedBox>
-
-<style>
-	img {
-		filter: invert(1);
-	}
-</style>
