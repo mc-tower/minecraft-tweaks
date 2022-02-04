@@ -2,6 +2,8 @@
 	import Button from 'src/components/atoms/Button.svelte'
 	import FileInput from 'src/components/atoms/FileInput.svelte'
 	import RoundedBox from 'src/components/atoms/RoundedBox.svelte'
+
+	import PackFormatSelector from 'src/components/molecules/PackFormatSelector.svelte'
 	import SelectedList from 'src/components/molecules/SelectedList.svelte'
 
 	import {
@@ -15,7 +17,6 @@
 
 	import { makePack } from 'src/utils/creator.js'
 	import { getPackInfo } from 'src/utils/extractor.js'
-	import { pack_format_mapping } from 'src/utils/pack_format.js'
 
 	function downloadButtonText(status) {
 		switch (status) {
@@ -62,6 +63,7 @@
 				src="/assets/images/icons/clear.svg"
 				class="m-0 p-0 cursor-pointer"
 				title="Clear"
+				tabindex="0"
 				alt="clear" />
 		{/if}
 	</span>
@@ -71,16 +73,7 @@
 	{/if}
 
 	{#if some_packs_selected}
-		<div class="flex justify-between">
-			<select
-				name="pack_format"
-				bind:value={pack_format}
-				class="rounded mb-3 bg-slate-800">
-				{#each Object.keys(pack_format_mapping).reverse() as format}
-					<option value={format}>{pack_format_mapping[format]}</option>
-				{/each}
-			</select>
-		</div>
+		<PackFormatSelector bind:value={pack_format} />
 	{/if}
 
 	<div class="flex justify-between mb-3">
