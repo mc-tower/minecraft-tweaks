@@ -5,6 +5,8 @@
 </script>
 
 <script>
+	export let disabled = false
+
 	let show = false
 </script>
 
@@ -19,11 +21,15 @@
 		use:a11yClick
 		src="/assets/images/icons/clear.svg"
 		class="cursor-pointer"
+		class:disabled
 		alt="clear" />
 </Tooltip>
 
 <style>
 	img {
 		filter: invert(1);
+	}
+	img.disabled {
+		filter: invert(0.6);
 	}
 </style>

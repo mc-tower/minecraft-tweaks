@@ -36,7 +36,7 @@
 	let uploaded = null,
 		pack_format = '8'
 
-	$: some_packs_selected = $selectedPacksOrder.size
+	$: some_packs_selected = Boolean($selectedPacksOrder.size)
 
 	async function onFileUpload() {
 		if (uploaded) {
@@ -58,9 +58,7 @@
 <RoundedBox class="bg-slate-800">
 	<span class="flex justify-between mb-3">
 		<h5 class="text-2xl">Selector</h5>
-		{#if some_packs_selected}
-			<ClearIcon on:click={clearSelectedPacks} />
-		{/if}
+		<ClearIcon on:click={clearSelectedPacks} disabled={!some_packs_selected} />
 	</span>
 
 	{#if Object.keys($allPacks).length}
