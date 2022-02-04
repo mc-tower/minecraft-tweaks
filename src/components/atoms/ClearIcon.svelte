@@ -6,7 +6,7 @@
 	let show = false
 </script>
 
-<Tooltip {show}>
+<Tooltip center {show}>
 	<svelte:fragment slot="tooltip">Clear</svelte:fragment>
 
 	<img
