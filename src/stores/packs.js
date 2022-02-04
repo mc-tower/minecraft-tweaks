@@ -10,6 +10,7 @@ export const allPacks = writable({})
 export const allPacksMapping = derived(allPacks, ($allPacks, set) => {
 	if (Object.keys($allPacks).length === 0) {
 		set({})
+		return
 	}
 
 	let mapping = {}
