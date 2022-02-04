@@ -8,6 +8,7 @@
 </script>
 
 <script>
+	/** @type {any} Category object */
 	export let category
 
 	let opened = false

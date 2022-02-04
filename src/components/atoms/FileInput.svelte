@@ -1,6 +1,10 @@
 <script>
+	/** @type {String} Text to show */
 	export let text = 'Select a file',
-		files = null
+		/** @type {String|null} Files from input */
+		files = null,
+		/** @type {String} Input accept attribute */
+		accept = '.zip'
 
 	$: displayed = files ? files[0].name : text
 </script>
@@ -10,7 +14,7 @@
 		<div
 			class="relative border border-gray-200 border-dashed rounded cursor-pointer">
 			<input
-				accept=".zip"
+				{accept}
 				type="file"
 				bind:files
 				on:change

@@ -12,8 +12,11 @@
 </script>
 
 <script>
+	/** @type {String} Path of pack: 'category/pack' */
 	export let path,
+		/** @type {String} Name of pack */
 		name,
+		/** @type {string[]} List of incompatibilities */
 		incompatible_list = []
 
 	let show_tooltip = false

@@ -1,5 +1,7 @@
 <script>
+	/** @type {Boolean} Is button disabled */
 	export let disabled = false,
+		/** @type {Boolean} Lighter color */
 		light = false
 
 	$: bg = light ? 'bg-indigo-800' : 'bg-indigo-600'

@@ -1,6 +1,8 @@
 <!-- https://github.com/Cosbgn/tailwindcss-tooltips -->
 <script>
+	/** @type {Boolean} Show tooltip at all or not */
 	export let has_tooltip = true,
+		/** @type {Boolean} Show tooltip programmatically */
 		show = false
 </script>
 
