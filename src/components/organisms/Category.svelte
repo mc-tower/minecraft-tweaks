@@ -22,7 +22,7 @@
 		class="text-3xl cursor-pointer"
 		role="button"
 		on:click={toggleOpen}
-		use:a11yClick>
+		use:a11yClick={{ add_codes: ['ArrowDown', 'ArrowUp'] }}>
 		{category.name}
 	</h5>
 

@@ -1,9 +1,9 @@
 /**
  * Click on focused element with keyboard.
  *
- * This will add tabindex="0" attribute and
- * will fire `click` event on `keydown` events
- * for keys `Space`, `Enter`, `NumpadEnter`, `ArrowDown`, `ArrowUp`
+ * This will add `tabindex="0"` attribute and
+ * fire `click` event on `keydown` events
+ * for keys `Space`, `Enter`, `NumpadEnter` (default)
  *
  * ```svelte
  * <div on:click={handleClick} use:a11yClick>
@@ -11,10 +11,18 @@
  * </div>
  * ```
  *
- * You can define your own keys:
+ * You can redefine keys:
  *
  * ```svelte
- * <div on:click={handleClick} use:a11yClick={['Enter']}>
+ * <div on:click={handleClick} use:a11yClick={{ codes: ['Enter'] }}>
+ *     Click me or focus and press Enter
+ * </div
+ * ```
+ *
+ * Or add more keys:
+ *
+ * ```svelte
+ * <div on:click={handleClick} use:a11yClick={{ add_codes: ['ArrowDown'] }}>
  *     Click me or focus and press Enter
  * </div
  * ```
@@ -24,14 +32,14 @@
  */
 export function a11yClick(
 	node,
-	codes_list = ['Space', 'Enter', 'NumpadEnter', 'ArrowDown', 'ArrowUp']
+	{ codes = ['Space', 'Enter', 'NumpadEnter'], add_codes = [] } = {}
 ) {
-	const codes = new Set(codes_list)
+	const code_set = new Set([...codes, ...add_codes])
 
 	node.tabIndex = '0'
 
 	function handleKeyDown(e) {
-		if (document.hasFocus() && codes.has(e.code)) {
+		if (document.hasFocus() && code_set.has(e.code)) {
 			node.click()
 		}
 	}
