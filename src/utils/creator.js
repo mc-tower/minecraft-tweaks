@@ -8,19 +8,26 @@ import { get } from 'svelte/store'
 
 import { loadResourcesList, loadResource } from 'src/api/resources.js'
 import {
+	allPacksMapping,
 	clearSelectedPacks,
 	selectedPacksOrder,
 	makeProgress,
 	makeStatus,
 } from 'src/stores/packs.js'
 import { hashCode } from 'src/utils/hash.js'
+import { range2format } from 'src/utils/pack_format'
 
 export async function makePack(pack_format) {
 	const selectedPacks = Array.from(get(selectedPacksOrder))
+	const localPacksMapping = get(allPacksMapping)
 
 	makeStatus.set('download')
 
-	let resources = await makeResourcesList(selectedPacks)
+	let resources = await makeResourcesList(
+		selectedPacks,
+		localPacksMapping,
+		pack_format
+	)
 	let blobs = await loadImages(resources)
 
 	makeStatus.set('zip')
@@ -31,7 +38,7 @@ export async function makePack(pack_format) {
 	clearSelectedPacks()
 }
 
-async function makeResourcesList(selected) {
+async function makeResourcesList(selected, all, pack_format) {
 	let resources = new Set(),
 		resources_files = new Set(),
 		path,
@@ -40,6 +47,16 @@ async function makeResourcesList(selected) {
 	for (let pack_path of selected) {
 		// hardcode a little
 		path = 'resourcepacks/' + pack_path
+
+		if (all[pack_path].versions.length > 0) {
+			let version = all[pack_path].versions.find((v) => {
+				let range = range2format(v.format)
+				return pack_format >= range.min && pack_format <= range.max
+			})
+
+			// version should be found
+			path += '/versions/' + version.folder
+		}
 
 		returned = await loadResourcesList(path)
 
