@@ -13,19 +13,45 @@ export const pack_format_mapping = {
 	1: '1.6.1 - 1.8.9',
 }
 
+const max_pack_format = Math.max(...Object.keys(pack_format_mapping))
+const min_pack_format = Math.min(...Object.keys(pack_format_mapping))
+
 /**
  * Covert range of pack_format like `1-6` to `{ min: 1, max: 6 }`
  *
- * @param  {string}       range Range, 1-5 or just 5
+ * Supported versions:
+ *
+ * - single value: 5
+ * - range: 1-5
+ * - range with one side: 5+ (5 and more) or 5- (5 and less)
+ *
+ * @param  {string}       range Range
  * @return {{ min, max }}       Result
  */
 export function range2format(range) {
-	let f = range.split('-')
-	if (f.length === 1) {
-		return { min: parseInt(f[0]), max: parseInt(f[0]) }
+	if (range.replace(/[+-]/g, '') === range) {
+		// 5
+		let value = parseInt(range)
+		return { min: value, max: value }
 	}
-	if (f.length === 2) {
-		return { min: parseInt(f[0]), max: parseInt(f[1]) }
+
+	let f
+
+	if ((f = range.match(/\d+(?<sign>[+-])$/)) !== null) {
+		// 5+ or 5-
+		let more = f.groups.sign === '+',
+			// parseInt result for '5+' and '5-' is 5
+			value = parseInt(range)
+		return {
+			min: more ? value : min_pack_format,
+			max: more ? max_pack_format : value,
+		}
 	}
+
+	if ((f = range.match(/(?<min>\d+)-(?<max>\d+)/)) !== null) {
+		// 1-5
+		return { min: parseInt(f.groups.min), max: parseInt(f.groups.max) }
+	}
+
 	return {}
 }
