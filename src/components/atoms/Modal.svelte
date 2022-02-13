@@ -41,7 +41,7 @@
 					<h2 class="font-semibold px-2">
 						<slot name="header">Header</slot>
 					</h2>
-					<ClearIcon on:click={close} />
+					<ClearIcon on:click={close} tooltip_text="Close" />
 				</header>
 				<main class="px-2 pb-6 text-center">
 					<slot name="body">Body</slot>

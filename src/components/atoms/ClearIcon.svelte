@@ -5,13 +5,14 @@
 </script>
 
 <script>
-	export let disabled = false
+	export let disabled = false,
+		tooltip_text = 'Clear'
 
 	let show = false
 </script>
 
 <Tooltip center {show}>
-	<svelte:fragment slot="tooltip">Clear</svelte:fragment>
+	<svelte:fragment slot="tooltip">{tooltip_text}</svelte:fragment>
 
 	<img
 		on:click
