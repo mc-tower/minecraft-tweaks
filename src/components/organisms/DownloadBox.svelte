@@ -72,7 +72,7 @@
 	<div class="flex justify-between mb-3">
 		<span>
 			<Button
-				on:click={() => makePack(pack_format)}
+				on:click={() => makePack(parseInt(pack_format))}
 				disabled={$packStatus !== 'waiting'}>
 				{downloadButtonText($packStatus)}
 			</Button>
