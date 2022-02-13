@@ -2,6 +2,7 @@
 	import Checkbox from 'src/components/atoms/Checkbox.svelte'
 	import Tooltip from 'src/components/atoms/Tooltip.svelte'
 
+	import { description as descriptionStore } from 'src/stores/modal'
 	import {
 		allPacksMapping,
 		selectedPacks,
@@ -33,6 +34,15 @@
 			selectedPacksOrder.delete(path)
 		}
 	}
+
+	$: description = $allPacksMapping[path].description
+
+	function showDescriptionModal() {
+		descriptionStore.set({
+			name: $allPacksMapping[path].name,
+			content: description,
+		})
+	}
 </script>
 
 <Tooltip has_tooltip={incompatible_list.length > 0} show={show_tooltip}>
@@ -50,5 +60,19 @@
 		on:blur={() => (show_tooltip = false)}
 		class={currently_incompatible ? danger_text : ''}>
 		{name}
+
+		<img
+			class:hidden={description === ''}
+			on:click={showDescriptionModal}
+			class="cursor-pointer"
+			src="/assets/images/icons/question-circle.svg"
+			slot="right"
+			alt="" />
 	</Checkbox>
 </Tooltip>
+
+<style>
+	img {
+		filter: invert(1);
+	}
+</style>

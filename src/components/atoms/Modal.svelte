@@ -1,4 +1,5 @@
 <script context="module">
+	import { createEventDispatcher } from 'svelte'
 	import { fly, slide } from 'svelte/transition'
 
 	import ClearIcon from 'src/components/atoms/ClearIcon.svelte'
@@ -9,11 +10,15 @@
 <script>
 	export let show = false
 
+	const dispatch = createEventDispatcher()
+
 	function open() {
 		show = true
 	}
 	function close() {
 		show = false
+
+		dispatch('close')
 	}
 </script>
 
