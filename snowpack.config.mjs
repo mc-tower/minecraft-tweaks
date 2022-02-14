@@ -35,7 +35,6 @@ export default {
 	optimize: {
 		// bundle: true,
 		minify: true,
-		sourcemap: false,
 	},
 	packageOptions: {
 		/* ... */
