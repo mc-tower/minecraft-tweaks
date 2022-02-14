@@ -18,7 +18,7 @@
 				type="file"
 				bind:files
 				on:change
-				class="absolute w-full h-full opacity-0 z-50"
+				class="absolute w-full h-full opacity-0"
 				tabindex="0"
 				title="" />
 
