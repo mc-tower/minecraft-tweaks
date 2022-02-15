@@ -4,17 +4,13 @@ Inspired by https://vanillatweaks.net
 
 ## Development
 
-Create folder `minetower`:
+Clone [dev-workspace](//github.com/minetower/dev-workspace#setup), then
 
 ```bash
-mkdir minetower
-cd minetower
-```
+./scripts/clone.sh --needed=minecraft-tweaks
 
-and clone inside two repos - `minecraft-tweaks` *and* `packs`, then
-
-```bash
 cd packs
+yarn install
 yarn build
 
 cd ../minecraft-tweaks
