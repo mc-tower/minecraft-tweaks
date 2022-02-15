@@ -532,9 +532,10 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
-"@minetower/ui-components@git+https://github.com/minetower/ui-components.git":
+"@minetower/ui-components@^1.0.0":
   version "1.0.0"
-  resolved "git+https://github.com/minetower/ui-components.git#4a68a37687cd3ce098458f483690054c675c5165"
+  resolved "https://gitlab.com/api/v4/projects/33752984/packages/npm/@minetower/ui-components/-/@minetower/ui-components-1.0.0.tgz#3f04fdafca3686bf13bf317af8f410834e7641a1"
+  integrity sha1-PwT9r8o2hr8TvzF6+PQQg052QaE=
 
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
