@@ -5,6 +5,7 @@
 	import RoundedBox from 'src/components/atoms/RoundedBox.svelte'
 
 	import PackFormatSelector from 'src/components/molecules/PackFormatSelector.svelte'
+	import PackPreview from 'src/components/molecules/PackPreview.svelte'
 	import SelectedList from 'src/components/molecules/SelectedList.svelte'
 
 	import {
@@ -60,6 +61,8 @@
 		<h5 class="text-2xl">Selector</h5>
 		<ClearIcon on:click={clearSelectedPacks} disabled={!some_packs_selected} />
 	</span>
+
+	<PackPreview />
 
 	{#if Object.keys($allPacks).length}
 		<SelectedList />

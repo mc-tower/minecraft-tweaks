@@ -8,6 +8,7 @@
 		selectedPacks,
 		selectedPacksOrder,
 	} from 'src/stores/packs.js'
+	import { showPreview, hidePreview } from 'src/stores/preview'
 
 	const danger_text = 'text-red-500'
 </script>
@@ -43,6 +44,15 @@
 			content: description,
 		})
 	}
+
+	function handleFocus() {
+		show_tooltip = true
+		showPreview()
+	}
+	function handleBlur() {
+		show_tooltip = false
+		hidePreview()
+	}
 </script>
 
 <Tooltip has_tooltip={incompatible_list.length > 0} show={show_tooltip}>
@@ -56,8 +66,10 @@
 		id={path}
 		on:change={(e) => handleCheck(path, e)}
 		bind:checked={$selectedPacks[path]}
-		on:focus={() => (show_tooltip = true)}
-		on:blur={() => (show_tooltip = false)}
+		on:focus={handleFocus}
+		on:blur={handleBlur}
+		on:mouseenter={() => showPreview(path)}
+		on:mouseleave={() => hidePreview()}
 		class={currently_incompatible ? danger_text : ''}>
 		{name}
 
