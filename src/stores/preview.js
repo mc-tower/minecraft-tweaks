@@ -14,7 +14,7 @@ export const packPreview = defaultWritable('/packs/resourcepacks')
 
 let timeout = null
 
-export function showPreview(path, clear) {
+export function showPreview(path) {
 	cancelHide()
 	packPreview.set('/packs/resourcepacks/' + path)
 }

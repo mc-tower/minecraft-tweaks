@@ -47,7 +47,7 @@
 
 	function handleFocus() {
 		show_tooltip = true
-		showPreview()
+		showPreview(path)
 	}
 	function handleBlur() {
 		show_tooltip = false
