@@ -13,3 +13,11 @@ body {
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* for {@html} */
+
+code, pre {
+	padding: 3px 5px;
+	@apply rounded;
+	@apply bg-slate-700;
+}
