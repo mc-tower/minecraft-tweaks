@@ -1,19 +1,18 @@
 {
   "scripts": {
-    "dev": "redrun --parallel dev:packs dev:assets dev:snowpack",
+    "dev": "redrun --parallel dev:packs dev:assets dev:vite",
     "dev:packs": "sirv ../packs/build --cors --dev --port 8081 --quiet",
     "dev:assets": "sirv ../assets --cors --dev --port 8082 --quiet",
-    "dev:snowpack": "snowpack dev",
-    "build": "snowpack build",
-    "format": "prettier --write --plugin-search-dir=. './**/*.js' './**/*.mjs' './**/*.svelte' './**/*.json'",
-    "format:check": "prettier --check --plugin-search-dir=. './**/*.js' './**/*.mjs' './**/*.svelte' './**/*.json'",
+    "dev:vite": "vite",
+    "build": "vite build",
+    "format": "prettier --write --plugin-search-dir=. './**/*.{js,svelte,json}'",
+    "format:check": "prettier --check --plugin-search-dir=. './**/*.{js,svelte,json}'",
     "prepare": "husky install .husky",
     "test": "web-test-runner \"src/**/*.test.js\""
   },
   "devDependencies": {
     "@minetower/ui-components": "^1.0.0",
-    "@snowpack/plugin-postcss": "^1.4.3",
-    "@snowpack/plugin-svelte": "^3.3.0",
+    "@sveltejs/vite-plugin-svelte": "^1.0.0-next.37",
     "@tailwindcss/forms": "^0.4.0",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/svelte": "^3.0.0",
@@ -28,12 +27,13 @@
     "prettier": "^2.2.1",
     "prettier-plugin-svelte": "^2.1.4",
     "redrun": "^9.0.1",
+    "sass": "^1.49.8",
     "sirv-cli": "^2.0.2",
-    "snowpack": "^3.0.11",
     "svelte": "^3.46.4",
     "svelte-preprocess": "^4.10.3",
     "svelte-storages": "^0.0.2",
-    "tailwindcss": "^3.0.22"
+    "tailwindcss": "^3.0.22",
+    "vite": "^2.8.4"
   },
   "dependencies": {
     "@zip.js/zip.js": "^2.4.4"

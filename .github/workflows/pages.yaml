@@ -23,7 +23,6 @@ jobs:
           yarn build
 
           cd build
-          rm -rf assets
           touch .nojekyll
 
       - name: Deploy
