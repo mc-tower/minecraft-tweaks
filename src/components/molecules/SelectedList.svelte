@@ -1,4 +1,6 @@
 <script context="module">
+	import AkarIconsDragHorizontal from '~icons/akar-icons/drag-horizontal?raw&width=17&height=17'
+
 	import {
 		allPacksMapping as packs,
 		selectedPacksOrder,
@@ -63,11 +65,9 @@
 			class:text-red-500={incompatibles[id]}
 			class="bg-slate-700 px-2 mb-1 rounded flex justify-between">
 			<i>{name}</i>
-			<img
-				src="/assets/images/drag-horizontal.svg"
-				width="17"
-				draggable="false"
-				alt="" />
+			<span class="icon mt-2" draggable="false">
+				{@html AkarIconsDragHorizontal}
+			</span>
 		</li>
 	{/each}
 </ul>
@@ -77,11 +77,11 @@
 		cursor: move;
 		cursor: grab;
 	}
-	img {
-		filter: invert(0.8);
+	span.icon {
+		@apply text-gray-300;
 	}
 	@media (pointer: coarse) {
-		img {
+		span.icon {
 			@apply hidden;
 		}
 	}

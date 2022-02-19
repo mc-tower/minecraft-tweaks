@@ -1,4 +1,6 @@
 <script context="module">
+	import PhX from '~icons/ph/x?raw'
+
 	import { a11yClick } from 'src/actions/a11yClick'
 
 	import Tooltip from 'src/components/atoms/Tooltip.svelte'
@@ -14,23 +16,24 @@
 <Tooltip center {show}>
 	<svelte:fragment slot="tooltip">{tooltip_text}</svelte:fragment>
 
-	<img
+	<span
 		on:click
 		slot="content"
 		on:focus={() => (show = true)}
 		on:blur={() => (show = false)}
 		use:a11yClick
-		src="/assets/images/icons/clear.svg"
-		class="cursor-pointer"
+		class:cursor-pointer={!disabled}
 		class:disabled
-		alt="clear" />
+		alt="clear">
+		{@html PhX}
+	</span>
 </Tooltip>
 
 <style>
-	img {
-		filter: invert(1);
+	span {
+		color: white;
 	}
-	img.disabled {
-		filter: invert(0.6);
+	span.disabled {
+		@apply text-gray-400;
 	}
 </style>

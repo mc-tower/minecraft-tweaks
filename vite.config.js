@@ -1,5 +1,6 @@
 import postcss from './postcss.config.js'
 import { svelte } from '@sveltejs/vite-plugin-svelte'
+import Icons from 'unplugin-icons/vite'
 
 import path from 'path'
 
@@ -16,7 +17,12 @@ const singleProxy = (path, port) => ({
  * @type {import('vite').UserConfig}
  */
 const config = {
-	plugins: [svelte()],
+	plugins: [
+		svelte(),
+		Icons({
+			compiler: 'svelte',
+		}),
+	],
 	css: { postcss },
 	resolve: {
 		alias: {

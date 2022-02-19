@@ -1,4 +1,6 @@
 <script context="module">
+	import PhQuestion from '~icons/ph/question?raw'
+
 	import Checkbox from 'src/components/atoms/Checkbox.svelte'
 	import Tooltip from 'src/components/atoms/Tooltip.svelte'
 
@@ -73,18 +75,19 @@
 		class={currently_incompatible ? danger_text : ''}>
 		{name}
 
-		<img
+		<span
 			class:hidden={description === ''}
 			on:click={showDescriptionModal}
-			class="cursor-pointer"
-			src="/assets/images/icons/question-circle.svg"
+			class="icon cursor-pointer"
 			slot="right"
-			alt="" />
+			alt="">
+			{@html PhQuestion}
+		</span>
 	</Checkbox>
 </Tooltip>
 
 <style>
-	img {
-		filter: invert(1);
+	span.icon {
+		color: white;
 	}
 </style>
