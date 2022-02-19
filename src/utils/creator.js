@@ -41,10 +41,10 @@ export async function makePack(pack_format) {
 async function makeResourcesList(selected, all, pack_format) {
 	let resources = new Set(),
 		resources_files = new Set(),
+		// hardcode a little
 		url_pack_prefix = 'resourcepacks/',
 		path,
-		returned,
-		extends_data
+		returned
 
 	function addResourceFile(path, file) {
 		resources.add({
@@ -55,34 +55,22 @@ async function makeResourcesList(selected, all, pack_format) {
 	}
 
 	for (let pack_path of selected) {
-		// hardcode a little
-		path = url_pack_prefix + pack_path
-
-		if (all[pack_path].versions.length > 0) {
-			let version = all[pack_path].versions.find((v) => {
-				let range = range2format(v.format)
-				return pack_format >= range.min && pack_format <= range.max
-			})
-
-			// version should be found
-			path += '/versions/' + version.folder
-		}
+		path =
+			url_pack_prefix +
+			pack_path +
+			findVersion(all[pack_path].versions, pack_format)
 
 		returned = await loadResourcesList(path)
 
 		// load files to extend resourcepack
 		if (all[pack_path].extends) {
-			returned.extends = { files: [] }
-			extends_data = await loadResourcesList(
-				url_pack_prefix + all[pack_path].extends
-			)
-
-			// we need to save it to separate list to remember
-			// that we should load these files from other resourcepack
-			for (let f of extends_data.files) {
-				if (!returned.files.includes(f)) {
-					returned.extends.files.push(f)
-				}
+			returned.extends = {
+				// we need to save it to separate list to remember
+				// that we should load these files from other resourcepack
+				files: await extendPack(
+					returned.files,
+					url_pack_prefix + all[pack_path].extends
+				),
 			}
 		}
 
@@ -100,12 +88,38 @@ async function makeResourcesList(selected, all, pack_format) {
 
 		if (returned.extends) {
 			returned.extends.files.forEach((file) =>
-				addResourceFile(all[pack_path].extends, file)
+				addResourceFile(url_pack_prefix + all[pack_path].extends, file)
 			)
 		}
 	}
 
 	return resources
+}
+
+function findVersion(versions, pack_format) {
+	if (versions.length > 0) {
+		let version = versions.find((v) => {
+			let range = range2format(v.format)
+			return pack_format >= range.min && pack_format <= range.max
+		})
+
+		// version should be found
+		return '/versions/' + version.folder
+	}
+	return ''
+}
+
+async function extendPack(existing, url) {
+	let data = await loadResourcesList(url)
+	let list = []
+
+	for (let f of data.files) {
+		if (!existing.includes(f)) {
+			list.push(f)
+		}
+	}
+
+	return list
 }
 
 async function loadImages(resources) {
