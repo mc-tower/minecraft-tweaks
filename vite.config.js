@@ -45,7 +45,7 @@ const config = {
 		minify: true,
 		outDir: 'build',
 	},
-	base: '/minecraft-tweaks',
+	base: '/minecraft-tweaks/',
 }
 
 export default config

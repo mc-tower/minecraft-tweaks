@@ -1,10 +1,12 @@
 {
   "scripts": {
-    "dev": "redrun --parallel dev:packs dev:assets dev:vite",
-    "dev:packs": "sirv ../packs/build --cors --dev --port 8081 --quiet",
-    "dev:assets": "sirv ../assets --cors --dev --port 8082 --quiet",
+    "dev": "redrun --parallel static:* dev:vite",
     "dev:vite": "vite",
     "build": "vite build",
+    "preview": "redrun --parallel static:* preview:vite",
+    "preview:vite": "vite preview",
+    "static:packs": "sirv ../packs/build --cors --dev --port 8081 --quiet",
+    "static:assets": "sirv ../assets --cors --dev --port 8082 --quiet",
     "format": "prettier --write --plugin-search-dir=. './**/*.{js,svelte,json}'",
     "format:check": "prettier --check --plugin-search-dir=. './**/*.{js,svelte,json}'",
     "prepare": "husky install .husky",
