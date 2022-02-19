@@ -21,6 +21,7 @@ export const allPacksMapping = derived(allPacks, ($allPacks, set) => {
 				description: p.description,
 				name: p.name,
 				incompatible: p.incompatible,
+				extends: p.extends,
 				versions: p.versions,
 			}
 		})

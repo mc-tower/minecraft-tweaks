@@ -41,12 +41,22 @@ export async function makePack(pack_format) {
 async function makeResourcesList(selected, all, pack_format) {
 	let resources = new Set(),
 		resources_files = new Set(),
+		url_pack_prefix = 'resourcepacks/',
 		path,
-		returned
+		returned,
+		extends_data
+
+	function addResourceFile(path, file) {
+		resources.add({
+			name: file,
+			path: `${path}/${file}`,
+		})
+		resources_files.add(file)
+	}
 
 	for (let pack_path of selected) {
 		// hardcode a little
-		path = 'resourcepacks/' + pack_path
+		path = url_pack_prefix + pack_path
 
 		if (all[pack_path].versions.length > 0) {
 			let version = all[pack_path].versions.find((v) => {
@@ -60,19 +70,39 @@ async function makeResourcesList(selected, all, pack_format) {
 
 		returned = await loadResourcesList(path)
 
+		// load files to extend resourcepack
+		if (all[pack_path].extends) {
+			returned.extends = { files: [] }
+			extends_data = await loadResourcesList(
+				url_pack_prefix + all[pack_path].extends
+			)
+
+			// we need to save it to separate list to remember
+			// that we should load these files from other resourcepack
+			for (let f of extends_data.files) {
+				if (!returned.files.includes(f)) {
+					returned.extends.files.push(f)
+				}
+			}
+		}
+
 		// not store pack if resulting resources already has
 		// resources with the same names
-		if (returned.files.some((f) => resources_files.has(f))) {
+		if (
+			returned.files.some((f) => resources_files.has(f)) ||
+			(returned.extends &&
+				returned.extends.files.some((f) => resources_files.has(f)))
+		) {
 			continue
 		}
 
-		returned.files.forEach((file) => {
-			resources.add({
-				name: file,
-				path: `${path}/${file}`,
-			})
-			resources_files.add(file)
-		})
+		returned.files.forEach((file) => addResourceFile(path, file))
+
+		if (returned.extends) {
+			returned.extends.files.forEach((file) =>
+				addResourceFile(all[pack_path].extends, file)
+			)
+		}
 	}
 
 	return resources
